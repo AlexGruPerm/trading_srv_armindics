@@ -33,12 +33,16 @@ class JsonParser():
         """ Constructor. """
         self.jsonContent = pJsonContent
 
+    def save_into_db(self):
+        """ Parse json content and save into db  """
+
+
     def outputJson(self):
         """ Output json content for debug purpose """
         i=0
         #elm is a dict from get_json - list of dicts.
         for elm in self.jsonContent:
-            print("-----------------------------------------------------------------------------------------------")
+            print("------------------------------------------------------------------------------------------------")
             elm_id   = elm['id']
             elm_name = elm['name']
             elm_indicators = elm['indicators']
