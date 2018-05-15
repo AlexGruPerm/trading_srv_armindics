@@ -1,3 +1,0 @@
-clear;
-
-drop table xxx;

@@ -47,6 +47,7 @@ class JsonParser():
             elm_name = elm['name']
             elm_indicators = elm['indicators']
             print("basic: "+str(elm_id)+" "+elm_name+" "+" count="+ str(len(elm_indicators)))
+            print(str(elm_indicators))
             # ----- indicators -------------
             for pv in elm_indicators:
                 pv_id = pv['id']
@@ -57,7 +58,7 @@ class JsonParser():
                 pv_date = pv['date']
                 pv_extraInfo = pv['extraInfo']
                 pv_valueGroups = pv['valueGroups']
-                print("      indicators:" + str(pv_id) +"  "+ pv_name )
+                print("      indicators:" + str(pv_id) +"  "+ pv_name +" ["+ str(pv_date)+"] -"+str(pv_extraInfo))
                 # ----- value groups -------------
                 for vg in pv_valueGroups:
                     vg_id     = vg['id']
@@ -73,7 +74,7 @@ class JsonParser():
                         vl_percent = vl['percent']
                         vl_dynamicsVector = vl['dynamicsVector']
                         vl_dinamics = vl['dinamics']
-                        print("                    valueGroups:" + str(vl_type) + "  " + vl_typeName) # + " " + str(vl_dinamics))
+                        print("                    valueGroups:" + str(vl_type) + "  " + vl_typeName + " ("+ vl_units +") " + str(vl_percent) + " " +str(vl_dynamicsVector)) # + " " + str(vl_dinamics))
                         # ----- dinamics -------------
                         for dm in vl_dinamics:
                             dm_period = dm['period']
