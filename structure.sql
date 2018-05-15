@@ -1,0 +1,3 @@
+clear;
+
+drop table xxx;
