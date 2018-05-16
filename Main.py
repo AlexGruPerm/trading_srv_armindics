@@ -36,7 +36,6 @@ class JsonParser():
     def save_into_db(self):
         """ Parse json content and save into db  """
 
-
     def outputJson(self):
         """ Output json content for debug purpose """
         i=0
