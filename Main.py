@@ -186,23 +186,71 @@ class JsonParser():
                                    [self.hist_id, l_parse_res])
             print("------------------------------------------------------------------------------------")
             print("self.hist_id=["+str(self.hist_id)+"] res=["+l_parse_res.getvalue()+"]")
-            print("------------------------------------------------------------------------------------")
+            print("--------------------------------------------------------")
             cur.close()
             self.conn.close()
             print("Oracle connection CLOSED.")
+
+
+class DetailsParser():
+    """ Class for parsing json with defined strcuture """
+    jsonContent = None  # json content for parsing
+    conn = None # connection to oracle RDBMS
+    hist_id = None #ID from table LOAD_DATES_HISTORY for relating rows in table TMP_SOURCE_DATA_SERV_11
+
+    def __init__(self,pJsonContent):
+        """ Constructor. """
+        self.jsonContent = pJsonContent
+
+    def outputJson(self, save_into_db = False):
+        """ Output json content (details) for debug purpose """
+        i=0
+        print(self.jsonContent)
+        #elm is a dict from get_json - list of dicts.
+        for elm in self.jsonContent:
+            print("------------------------------------------------------------------------------------------------")
+            elm_id      = elm['id']
+            elm_titles  = elm['titles']
+            elm_details = elm['details']
+            #+str(elm_titles)
+            print("1)["+str(elm_id)+"] "+str(elm_details))
+            for det in elm_details:
+                det_id      = det['id']
+                det_child = det['children']
+                print("   2)["+str(det_id)+"] "+ str(det_child))
+                #for det_ch in det_child:
+                #    det_ch_id =
+                #    det_ch_=
+
+
 
 
 
 
 def main():
     """Enter point."""
+    # Service main data
     serviceUrl = "http://87.245.154.49/trading/service/new/armIndicators"
+    # Service details data
+    detailsUrl = "http://87.245.154.49/trading/service/new/armSimpleDetails"
 
+    #data
+    """
     srv = JsonLoader(serviceUrl)
     srv.request_json()
-
     prs = JsonParser(srv.get_json()) # input - list of dicts
     prs.outputJson(save_into_db=True)
+    """
+
+    #details
+
+    det = JsonLoader(detailsUrl)
+    det.request_json()
+    detPars = DetailsParser(det.get_json())
+    detPars.outputJson(save_into_db=False)
+    print("Finish")
+
+
 
 
 
